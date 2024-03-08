@@ -17,6 +17,7 @@
 mono_crash.*
 
 .DS_Store
+.idea/
 
 # Build results
 [Dd]ebug/
