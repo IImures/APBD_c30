@@ -22,6 +22,7 @@ static int GetMax(int[] arr)
     {
         if (num > max)
         {
+            // Modifying from main branch
             max = num;
         }
     }
