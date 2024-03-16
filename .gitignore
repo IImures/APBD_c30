@@ -16,8 +16,11 @@
 # Mono auto generated files
 mono_crash.*
 
+# Project generated files
 .DS_Store
 *.idea/
+*bin/
+*obj/
 
 # Build results
 [Dd]ebug/
