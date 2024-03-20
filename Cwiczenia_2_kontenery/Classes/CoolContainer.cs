@@ -1,3 +1,5 @@
+using Cwiczenia_2_kontenery.Exceptions;
+
 namespace Cwiczenia_2_kontenery.Classes;
 
 public class CoolContainer : Container
@@ -5,13 +7,18 @@ public class CoolContainer : Container
     private const char ContainerType = 'C';
     
     public Cargo Cargo { get;}
-
+    public double ContainerTemperature { get; set; }
     public CoolContainer(
-        double maxWeight, double height, double wight, double containerWeight, Cargo cargo
+        double maxWeight, double height, double wight, double containerWeight, 
+        double containerTemperature, Cargo cargo
         ) : base(maxWeight, height, wight, containerWeight)
     {
         Type = ContainerType;
         Cargo = cargo;
+        ContainerTemperature = containerTemperature;
+
+        if (cargo.Temperature < containerTemperature)
+            throw new WrongContainerTemperature("Container temperature is higher than cargo temperature");
     }
 
     public string CargoName {
@@ -24,6 +31,9 @@ public class CoolContainer : Container
     
     public override string ToString()
     {
-        return $"Container ID: {Id}, Type: {Type}, Weight: {Weight}, Number: {Number}, Cargo: {CargoName}, Temperature: {CargoTemperature}";
+        return $"Container ID: {Id}, Type: {Type}, " +
+               $"Weight: {Weight}, Number: {Number}, " +
+               $"Cargo: {CargoName}, CargoTemperature: {CargoTemperature}, " +
+               $"ContainerTemperature: {ContainerTemperature}";
     }
 }
