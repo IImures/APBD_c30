@@ -30,7 +30,7 @@ public abstract class Container
         ContainerWeight = containerWeight;
     }
     
-    public void Load(double mass)
+    public virtual void Load(double mass)
     {
         if (Weight + mass > MaxWeight)
         {
@@ -39,8 +39,11 @@ public abstract class Container
         CargoWeight += mass;
     }
     
-    public void Unload(double mass)
+    public virtual void Unload(double mass)
     {
+        if (CargoWeight == 0)
+            throw new ContainerEmptyException("Nothing to unload");
+        
         if (CargoWeight - mass < 0)
         {
             throw new OverfillException("To much unload");

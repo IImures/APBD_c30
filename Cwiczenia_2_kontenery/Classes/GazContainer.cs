@@ -18,10 +18,11 @@ public class GazContainer : Container, IHazardNotifier
         GazType = gazType;
     }
 
-    public void Unload(double mass)
+    public override void Unload(double mass)
     {
-        if(mass == 0)
-            throw new OverfillException("Nothing to unload");
+        if(CargoWeight == 0)
+            throw new ContainerEmptyException("Nothing to unload");
+        
         if (CargoWeight - mass < CargoWeight*0.05)
         {
             NotifyHazard("You can not unload this much of gas!");

@@ -1,19 +1,27 @@
 ﻿using Cwiczenia_2_kontenery.Classes;
-using Cwiczenia_2_kontenery.Exceptions;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        Container container = new CoolContainer(10, 20,30, 40);
-        container.MaxMass = 100;
-        container.Height = 10;
-        container.Wight = 10;
-        container.Weight = 10;
-        Console.WriteLine(container.Number);
-        Console.WriteLine(container.MaxMass);
-        Console.WriteLine(container.Height);
-        Console.WriteLine(container.Wight);
-        Console.WriteLine(container.Weight);
+        List<Cargo> cargoTypes = new List<Cargo>();
+        cargoTypes.Add(new Cargo("Banany", 15));
+        cargoTypes.Add(new Cargo("Mleko", 5));
+        cargoTypes.Add(new Cargo("Mięso", 0));
+        
+        Container coolContainer = new CoolContainer(1000, 2, 2, 100, 5, cargoTypes[0]);
+        coolContainer.Load(100);
+        Console.WriteLine(coolContainer);
+        coolContainer.Unload(50);
+        Console.WriteLine(coolContainer);
+        
+        
+        Container liquidContainer = new LiquidContainer(1000, 2, 2, 100, "Woda", false);
+        liquidContainer.Load(900);
+        Console.WriteLine(liquidContainer);
+        
+        Container liquidContainer2 = new LiquidContainer(1000, 2, 2, 100, "Paliwo", true);
+        liquidContainer2.Load(500);
+        Console.WriteLine(liquidContainer2);
     }
 }
