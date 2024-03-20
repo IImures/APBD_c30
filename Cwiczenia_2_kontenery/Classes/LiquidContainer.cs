@@ -7,21 +7,20 @@ public class LiquidContainer : Container, IHazardNotifier
 {
     private const char ContainerType = 'L';
     
-    public string LiquidType { get; set; }
-    public bool IsHazardous { get; set; }
+
+    public Cargo Cargo { get; }
     
     public LiquidContainer(
-        double maxWeight, double height, double wight, double containerWeight, string liquidType, bool isHazardous
+        double maxWeight, double height, double wight, double containerWeight, Cargo cargo
         ) : base(maxWeight, height, wight, containerWeight)
     {
         Type = ContainerType;
-        LiquidType = liquidType;
-        IsHazardous = isHazardous;
+        Cargo = cargo;
     }
     
     public override void Load(double mass)
     {
-        if(IsHazardous) LoadHazardous(mass);
+        if(Cargo.IsHazardous) LoadHazardous(mass);
         else LoadSafe(mass);
     }
     
@@ -52,6 +51,6 @@ public class LiquidContainer : Container, IHazardNotifier
     {
         return $"Container ID: {Id}, Type: {Type}, " +
                $"Weight: {Weight}, Number: {Number}, " +
-               $"LiquidType: {LiquidType}, IsHazardous: {IsHazardous}";
+               $"LiquidType: {Cargo.Name}, IsHazardous: {Cargo.IsHazardous}";
     }
 }
