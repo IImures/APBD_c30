@@ -5,12 +5,13 @@ namespace Cwiczenia_2_kontenery.Classes;
 public abstract class Container
 {
     private static int _numberOfContainers = 0;
-    public int Id { get; set; }
-    public double CargoWeight { get; set; }
-    public double Height { get; set; }
-    public double Wight { get; set; }
-    public double ContainerWeight { get; set; }
-    public double MaxWeight { get; set; }
+    protected int Id { get; set; }
+    protected double CargoWeight { get; set; }
+    protected double Height { get; set; }
+    protected double Wight { get; set; }
+    protected double ContainerWeight { get; set; }
+    protected double MaxWeight { get; set; }
+    protected Cargo Cargo { get; }
     protected char Type{get; set;}
 
     protected Container()
@@ -19,7 +20,7 @@ public abstract class Container
         Id = _numberOfContainers;
     }
     
-    protected Container(double maxWeight, double height, double wight, double containerWeight)
+    protected Container(double maxWeight, double height, double wight, double containerWeight, Cargo cargo)
     {
         _numberOfContainers++;
         Id = _numberOfContainers;
@@ -28,6 +29,7 @@ public abstract class Container
         Height = height;
         Wight = wight;
         ContainerWeight = containerWeight;
+        Cargo = cargo;
     }
     
     public virtual void Load(double mass)

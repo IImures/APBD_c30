@@ -7,15 +7,15 @@ public class GazContainer : Container, IHazardNotifier
 {
     private const char ContainerType = 'G';
     public double Pressure { get; set; }
-    public Cargo Cargo { get; }
+    
     
     public GazContainer(
         double maxWeight, double height, double wight, double containerWeight, double pressure, Cargo cargo
-        ) : base(maxWeight, height, wight, containerWeight)
+        ) : base(maxWeight, height, wight, containerWeight, cargo)
     {
         Type = ContainerType;
         Pressure = pressure;
-        Cargo = cargo;
+        //Cargo = cargo;
     }
 
     public override void Unload(double mass)

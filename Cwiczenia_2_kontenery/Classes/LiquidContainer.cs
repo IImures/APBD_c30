@@ -7,15 +7,11 @@ public class LiquidContainer : Container, IHazardNotifier
 {
     private const char ContainerType = 'L';
     
-
-    public Cargo Cargo { get; }
-    
     public LiquidContainer(
         double maxWeight, double height, double wight, double containerWeight, Cargo cargo
-        ) : base(maxWeight, height, wight, containerWeight)
+        ) : base(maxWeight, height, wight, containerWeight,cargo)
     {
         Type = ContainerType;
-        Cargo = cargo;
     }
     
     public override void Load(double mass)

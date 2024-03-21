@@ -6,15 +6,13 @@ public class CoolContainer : Container
 {
     private const char ContainerType = 'C';
     
-    public Cargo Cargo { get;}
-    public double ContainerTemperature { get; set; }
+    private double ContainerTemperature { get; set; }
     public CoolContainer(
         double maxWeight, double height, double wight, double containerWeight, 
         double containerTemperature, Cargo cargo
-        ) : base(maxWeight, height, wight, containerWeight)
+        ) : base(maxWeight, height, wight, containerWeight, cargo)
     {
         Type = ContainerType;
-        Cargo = cargo;
         ContainerTemperature = containerTemperature;
 
         if (cargo.Temperature < containerTemperature)

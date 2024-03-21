@@ -25,4 +25,9 @@ public class Cargo
         Temperature = 0;
         IsHazardous = isHazardous;
     }
+
+    public override string ToString()
+    {
+        return $"Cargo: {Name}, Temperature: {Temperature}, IsHazardous: {IsHazardous}";
+    }
 }
