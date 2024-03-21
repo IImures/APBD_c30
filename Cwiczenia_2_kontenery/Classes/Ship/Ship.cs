@@ -1,3 +1,5 @@
+using Cwiczenia_2_kontenery.Exceptions;
+
 namespace Cwiczenia_2_kontenery.Classes;
 
 public class Ship
@@ -18,6 +20,22 @@ public class Ship
         Containers = new List<Container>();
     }
     
+    public void AddContainer(Container container)
+    {
+        if (Containers.Count >= MaxContainers)
+            throw new OverfillException("To much containers");
+        if (container.Weight + Containers.Sum(c => c.Weight) > MaxWeight)
+            throw new OverfillException("To much weight");
+        Containers.Add(container);
+    }
+    public void Unload(int containerId)
+    {
+        var container = Containers.FirstOrDefault(c => c.Id == containerId);
+        if (container == null)
+            throw new ContainerNotFoundException("Container not found");
+        Containers.Remove(container);
+    }
+    
     public int ContainerCount {
         get=> Containers.Count;
     }
@@ -27,3 +45,4 @@ public class Ship
         return $"Ship ID: {Id}, Name: {Name}, MaxWeight: {MaxWeight}, MaxContainers: {MaxContainers}, ContainerCount: {ContainerCount}";
     }
 }
+
