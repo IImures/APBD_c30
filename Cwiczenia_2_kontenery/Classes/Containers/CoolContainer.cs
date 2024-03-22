@@ -1,6 +1,6 @@
 using Cwiczenia_2_kontenery.Exceptions;
 
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Containers;
 
 public class CoolContainer : Container
 {
@@ -9,7 +9,7 @@ public class CoolContainer : Container
     private double ContainerTemperature { get; set; }
     public CoolContainer(
         double maxWeight, double height, double wight, double containerWeight, 
-        double containerTemperature, Cargo cargo
+        double containerTemperature, Cargo.Cargo? cargo
         ) : base(maxWeight, height, wight, containerWeight, cargo)
     {
         Type = ContainerType;

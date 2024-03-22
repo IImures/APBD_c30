@@ -1,7 +1,5 @@
-﻿using Cwiczenia_2_kontenery.Classes;
-using Cwiczenia_2_kontenery.Classes.Data;
-using Cwiczenia_2_kontenery.Classes.Service;
-using Cwiczenia_2_kontenery.Exceptions;
+﻿using Cwiczenia_2_kontenery.Data;
+using Cwiczenia_2_kontenery.Service;
 
 namespace Cwiczenia_2_kontenery;
 

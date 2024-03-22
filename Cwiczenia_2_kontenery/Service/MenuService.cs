@@ -1,7 +1,10 @@
-using Cwiczenia_2_kontenery.Classes.Data;
+using Cwiczenia_2_kontenery.Classes.Cargo;
+using Cwiczenia_2_kontenery.Classes.Containers;
+using Cwiczenia_2_kontenery.Classes.Ship;
+using Cwiczenia_2_kontenery.Data;
 using Cwiczenia_2_kontenery.Exceptions;
 
-namespace Cwiczenia_2_kontenery.Classes.Service;
+namespace Cwiczenia_2_kontenery.Service;
 
 public class MenuService
 {
@@ -52,7 +55,7 @@ public class MenuService
                 Console.Write("Your input:");
             else
                 Console.Write(message);
-            userInput = Double.Parse(Console.ReadLine());
+            userInput = Double.Parse(Console.ReadLine()!);
             return userInput;
         }
         catch (FormatException)
@@ -73,7 +76,7 @@ public class MenuService
                 Console.Write("Your input:");
             else
                 Console.Write(message);
-            userInput = int.Parse(Console.ReadLine());
+            userInput = int.Parse(Console.ReadLine()!);
             return userInput;
         }
         catch (FormatException)
@@ -126,7 +129,7 @@ public class MenuService
             try
             {
                 Console.Write("Is the cargo hazardous? (Y/N): ");
-                string input = Console.ReadLine().ToUpper();
+                string input = Console.ReadLine()!.ToUpper();
                 switch (input)
                 {
                     case "Y":
@@ -185,7 +188,7 @@ public class MenuService
         if (containerWeight == null)
             containerWeight = AskUserForDouble("Enter the weight of the container: ");
 
-        Cargo cargo = null;
+        Cargo? cargo = null;
         if (cargoName == null)
         {
             try
@@ -296,7 +299,7 @@ public class MenuService
     public void LoadShip()
     {
         _dataManager.PrintAllShips();
-        Ship selectedShip = _dataManager.GetShipById(AskUserForInt("Choose your ship(enter number in id): "));
+        Ship? selectedShip = _dataManager.GetShipById(AskUserForInt("Choose your ship(enter number in id): "));
         if (selectedShip == null)
         {
             Console.WriteLine("No ship was found. Press any key to continue...");
@@ -304,7 +307,7 @@ public class MenuService
             return;
         }
         _dataManager.PrintAllContainers();
-        Container selectedContainer = _dataManager.GetContainerById(AskUserForInt("Choose your container(enter its id): "));
+        Container? selectedContainer = _dataManager.GetContainerById(AskUserForInt("Choose your container(enter its id): "));
         if (selectedContainer == null)
         {
             Console.WriteLine("No container was found. Press any key to continue...");
@@ -330,7 +333,7 @@ public class MenuService
     public void UnloadShip()
     {
         _dataManager.PrintAllShips();
-        Ship selectedShip = _dataManager.GetShipById(AskUserForInt("Choose your ship(enter number in id): "));
+        Ship? selectedShip = _dataManager.GetShipById(AskUserForInt("Choose your ship(enter number in id): "));
         if (selectedShip == null)
         {
             Console.WriteLine("No ship was found");
@@ -367,7 +370,7 @@ public class MenuService
     public void LoadContainer()
     {
         _dataManager.PrintAllContainers();
-        Container selectedContainer =
+        Container? selectedContainer =
             _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
         if (selectedContainer == null)
         {
@@ -393,7 +396,7 @@ public class MenuService
     public void UnloadContainer()
     {
         _dataManager.PrintAllContainers();
-        Container selectedContainer =
+        Container? selectedContainer =
             _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
         if (selectedContainer == null)
         {
@@ -419,7 +422,7 @@ public class MenuService
     public void DeleteContainer()
     {
         _dataManager.PrintAllContainers();
-        Container selectedContainer =
+        Container? selectedContainer =
             _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
         if (selectedContainer == null)
         {

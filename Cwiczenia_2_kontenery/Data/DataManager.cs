@@ -1,8 +1,12 @@
-namespace Cwiczenia_2_kontenery.Classes.Data;
+using Cwiczenia_2_kontenery.Classes.Cargo;
+using Cwiczenia_2_kontenery.Classes.Containers;
+using Cwiczenia_2_kontenery.Classes.Ship;
+
+namespace Cwiczenia_2_kontenery.Data;
 
 public class DataManager
 {
-    private  List<Cargo> _coolCargo = new();
+    private  List<Cargo?> _coolCargo = new();
     private  List<Cargo> _liquidCargo = new();
     private  List<Cargo> _gazCargo = new ();
 
@@ -30,9 +34,9 @@ public class DataManager
         _containers.Add(new CoolContainer(1000,100,50,30,10, _coolCargo[0]));
     }
 
-    public Cargo FindCargo(string cargoName)
+    public Cargo? FindCargo(string cargoName)
     {
-        Cargo result;
+        Cargo? result;
         result = _coolCargo.Find(c => c.Name == cargoName);
         if (result != null) return result;
         result = _gazCargo.Find(c => c.Name == cargoName);
@@ -76,7 +80,7 @@ public class DataManager
         _liquidCargo.Add(liquidCargo);
     }
 
-    public void AddCoolCargo(Cargo cargo)
+    public void AddCoolCargo(Cargo? cargo)
     {
         _coolCargo.Add(cargo);
     }
@@ -93,7 +97,7 @@ public class DataManager
     
     public void PrintAllCargo()
     {
-        foreach (Cargo cargo in _coolCargo)
+        foreach (Cargo? cargo in _coolCargo)
         {
             Console.WriteLine(cargo);
         }
@@ -109,7 +113,7 @@ public class DataManager
 
     public void PrintCoolContainers()
     {
-        foreach (Cargo cargo in _coolCargo)
+        foreach (Cargo? cargo in _coolCargo)
         {
             Console.WriteLine(cargo);
         }
@@ -133,7 +137,7 @@ public class DataManager
 
     public void PrintAllCoolCargo()
     {
-        foreach (Cargo cargo in _coolCargo)
+        foreach (Cargo? cargo in _coolCargo)
         {
             Console.WriteLine(cargo);
         }
@@ -169,7 +173,7 @@ public class DataManager
 
     public void DeleteShipById(int id)
     {
-        Ship toRemove = null;
+        Ship toRemove = null!;
         foreach (var ship in _ships)
         {
             if (ship.Id == id) toRemove = ship;

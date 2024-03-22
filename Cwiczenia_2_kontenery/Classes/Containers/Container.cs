@@ -1,6 +1,6 @@
 using Cwiczenia_2_kontenery.Exceptions;
 
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Containers;
 
 public abstract class Container
 {
@@ -11,7 +11,7 @@ public abstract class Container
     public double Wight { get; set; }
     public double ContainerWeight { get; set; }
     public double MaxWeight { get; set; }
-    public Cargo Cargo { get; }
+    public Cargo.Cargo? Cargo { get; }
     protected char Type{get; set;}
 
     protected Container()
@@ -20,7 +20,7 @@ public abstract class Container
         Id = _numberOfContainers;
     }
     
-    protected Container(double maxWeight, double height, double wight, double containerWeight, Cargo cargo)
+    protected Container(double maxWeight, double height, double wight, double containerWeight, Cargo.Cargo? cargo)
     {
         _numberOfContainers++;
         Id = _numberOfContainers;

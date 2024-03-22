@@ -1,4 +1,4 @@
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Cargo;
 
 public class Cargo
 {

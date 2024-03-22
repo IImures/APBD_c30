@@ -1,6 +1,7 @@
+using Cwiczenia_2_kontenery.Classes.Containers;
 using Cwiczenia_2_kontenery.Exceptions;
 
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Ship;
 
 public class Ship
 {

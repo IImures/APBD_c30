@@ -1,14 +1,14 @@
 using Cwiczenia_2_kontenery.Exceptions;
 using Cwiczenia_2_kontenery.Intefaces;
 
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Containers;
 
 public class LiquidContainer : Container, IHazardNotifier
 {
     private const char ContainerType = 'L';
     
     public LiquidContainer(
-        double maxWeight, double height, double wight, double containerWeight, Cargo cargo
+        double maxWeight, double height, double wight, double containerWeight, Cargo.Cargo? cargo
         ) : base(maxWeight, height, wight, containerWeight,cargo)
     {
         Type = ContainerType;

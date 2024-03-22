@@ -1,7 +1,7 @@
 using Cwiczenia_2_kontenery.Exceptions;
 using Cwiczenia_2_kontenery.Intefaces;
 
-namespace Cwiczenia_2_kontenery.Classes;
+namespace Cwiczenia_2_kontenery.Classes.Containers;
 
 public class GazContainer : Container, IHazardNotifier
 {
@@ -10,7 +10,7 @@ public class GazContainer : Container, IHazardNotifier
     
     
     public GazContainer(
-        double maxWeight, double height, double wight, double containerWeight, double pressure, Cargo cargo
+        double maxWeight, double height, double wight, double containerWeight, double pressure, Cargo.Cargo? cargo
         ) : base(maxWeight, height, wight, containerWeight, cargo)
     {
         Type = ContainerType;
