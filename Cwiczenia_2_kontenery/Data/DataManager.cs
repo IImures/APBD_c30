@@ -183,4 +183,14 @@ public class DataManager
     {
         _containers.Remove(container);
     }
+
+    public Container? FindContainerById(int id)
+    {
+        foreach (Container container in _containers)
+        {
+            if (container.Id == id) return container;
+        }
+
+        return null;
+    }
 }

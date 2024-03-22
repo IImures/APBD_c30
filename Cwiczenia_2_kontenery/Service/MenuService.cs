@@ -363,4 +363,82 @@ public class MenuService
         _dataManager.PrintAllShips();
         _dataManager.DeleteShipById(AskUserForInt("Choose your ship(enter number in id): "));
     }
+
+    public void LoadContainer()
+    {
+        _dataManager.PrintAllContainers();
+        Container selectedContainer =
+            _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
+        if (selectedContainer == null)
+        {
+            Console.WriteLine("Container wasn't selected.Press any key to continue");
+            Console.ReadKey();
+            return;
+        }
+
+        try
+        {
+            selectedContainer.Load(AskUserForDouble("Enter weight to load: "));
+            Console.WriteLine("Container was loaded. Press any key to continue...");
+            Console.ReadKey();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: {e.Message}");
+            Console.WriteLine("Container wasn't loaded. Press any key to continue...");
+            Console.ReadKey();
+        }
+    }
+    
+    public void UnloadContainer()
+    {
+        _dataManager.PrintAllContainers();
+        Container selectedContainer =
+            _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
+        if (selectedContainer == null)
+        {
+            Console.WriteLine("Container wasn't selected.Press any key to continue");
+            Console.ReadKey();
+            return;
+        }
+
+        try
+        {
+            selectedContainer.Unload(AskUserForDouble("Enter weight to unload: "));
+            Console.WriteLine("Container was unloaded. Press any key to continue...");
+            Console.ReadKey();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: {e.Message}");            
+            Console.WriteLine("Container wasn't unloaded. Press any key to continue...");
+            Console.ReadKey();
+        }
+    }
+    
+    public void DeleteContainer()
+    {
+        _dataManager.PrintAllContainers();
+        Container selectedContainer =
+            _dataManager.FindContainerById(AskUserForInt("Enter container id(only number): "));
+        if (selectedContainer == null)
+        {
+            Console.WriteLine("Container wasn't selected.Press any key to continue");
+            Console.ReadKey();
+            return;
+        }
+
+        try
+        {
+           _dataManager.DeleteContainer(selectedContainer);
+           Console.WriteLine("Container was deleted. Press any key to continue...");
+           Console.ReadKey();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception: {e.Message}");
+            Console.WriteLine("Container wasn't deleted. Press any key to continue...");
+            Console.ReadKey();
+        }
+    }
 }

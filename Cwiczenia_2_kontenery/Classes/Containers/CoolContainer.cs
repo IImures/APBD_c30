@@ -30,7 +30,7 @@ public class CoolContainer : Container
     public override string ToString()
     {
         return $"Container ID: {Id}, Type: {Type}, " +
-               $"Weight: {Weight}, Number: {Number}, " +
+               $"Weight: {Weight}, CargoWeight: {CargoWeight}, MaxWeight: {MaxWeight}, Number: {Number}, " +
                $"Cargo: {CargoName}, CargoTemperature: {CargoTemperature}, " +
                $"ContainerTemperature: {ContainerTemperature}";
     }

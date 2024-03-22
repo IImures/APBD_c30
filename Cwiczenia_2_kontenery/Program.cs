@@ -79,8 +79,8 @@ public class Program
                     break;
                 
                 case "4": //"4. Load Container"
-                    Console.WriteLine("You selected Option 2");
                     if (dataManager.ShipCount == 0) break;
+                    ConfigureContainer();
                     break;
                 
                 case "5": //"5. Add Cargo"
@@ -98,6 +98,37 @@ public class Program
                     break;
             }
             Console.Clear();
+        }
+    }
+    
+    private static void ConfigureContainer()
+    {
+        Console.Clear();
+        Console.WriteLine("Enter option:");
+        Console.WriteLine("1. Load Container");
+        Console.WriteLine("2. Unload Container");
+        Console.WriteLine("3. Delete Container");
+        Console.WriteLine("4. Exit");
+        string? userInput = Console.ReadLine();
+        switch (userInput)
+        {
+            case "1":
+                menuService.LoadContainer();
+                break;
+            case "2":
+                menuService.UnloadContainer();
+                break;
+            case "3":
+                menuService.DeleteContainer();
+                break;
+            case "4":
+                return;
+            default:
+                Console.WriteLine("Invalid option, please try again. Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                ConfigureShip();
+                break;
         }
     }
 

@@ -39,7 +39,7 @@ public class GazContainer : Container, IHazardNotifier
     public override string ToString()
     {
         return $"Container ID: {Id}, Type: {Type}, " +
-               $"Weight: {Weight}, Number: {Number}, " +
+               $"Weight: {Weight}, CargoWeight: {CargoWeight}, MaxWeight: {MaxWeight}, Number: {Number}, " +
                $"GasType: {Cargo.Name}, Pressure: {Pressure}";
     }
 }
