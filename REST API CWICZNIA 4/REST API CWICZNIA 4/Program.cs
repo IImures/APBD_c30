@@ -1,6 +1,19 @@
 
+using REST_API_CWICZNIA_4;
+using REST_API_CWICZNIA_4.Animal.Entity;
+using REST_API_CWICZNIA_4.Animal.Repository;
+using REST_API_CWICZNIA_4.Animal.Service;
+using REST_API_CWICZNIA_4.DB;
+using REST_API_CWICZNIA_4.Record.Entity;
+using REST_API_CWICZNIA_4.Record.Repository;
+using REST_API_CWICZNIA_4.Record.Service;
+using REST_API_CWICZNIA_4.Repository;
+using REST_API_CWICZNIA_4.Type.Entity;
+using REST_API_CWICZNIA_4.Type.Repository;
+using REST_API_CWICZNIA_4.Type.Service;
+
 public class Program{
-    public static void main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +22,17 @@ public class Program{
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
+        
+        builder.Services.AddSingleton<IMocDb, MocDb>();
+        builder.Services.AddScoped<SimpleRepository<TypeEntity, ICollection<TypeEntity>>, TypeRepository>();
+        builder.Services.AddScoped<TypeService>();
+
+        builder.Services.AddScoped<SimpleRepository<AnimalEntity, ICollection<AnimalEntity>>, AnimalRepository>();
+        builder.Services.AddScoped<AnimalService>();
+
+        builder.Services.AddScoped<SimpleRepository<RecordEntity, ICollection<RecordEntity>>, RecordRepository>();
+        builder.Services.AddScoped<RecordService>();
+       
 
         var app = builder.Build();
 
