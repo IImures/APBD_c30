@@ -1,5 +1,6 @@
 ﻿using REST_API_CWICZNIA_4.Animal.Controller.Request;
 using REST_API_CWICZNIA_4.Animal.Entity;
+using REST_API_CWICZNIA_4.Record.Entity;
 using REST_API_CWICZNIA_4.Repository;
 using REST_API_CWICZNIA_4.Type.Entity;
 
@@ -10,13 +11,16 @@ public class AnimalService
 
     private SimpleRepository<AnimalEntity, ICollection<AnimalEntity>> _animalRepository;
     private SimpleRepository<TypeEntity, ICollection<TypeEntity>> _typeRepository;
+    private SimpleRepository<RecordEntity, ICollection<RecordEntity>> _recordRepository;
     
     public AnimalService(
         SimpleRepository<AnimalEntity, ICollection<AnimalEntity>> animalRepository,
-        SimpleRepository<TypeEntity, ICollection<TypeEntity>> typeRepository)
+        SimpleRepository<TypeEntity, ICollection<TypeEntity>> typeRepository,
+        SimpleRepository<RecordEntity, ICollection<RecordEntity>> recordRepository)
     {
         _animalRepository = animalRepository;
         _typeRepository = typeRepository;
+        _recordRepository = recordRepository;
     }
     
     public List<AnimalEntity> GetAll()
@@ -73,5 +77,13 @@ public class AnimalService
         
         
         return animal;
+    }
+
+    public List<RecordEntity> GetAnimalRecords(int id)
+    {
+        List<RecordEntity> recordEntities = _recordRepository.GetAll()
+            .Where(r => r.Animal.Id == id)
+            .ToList();
+        return recordEntities;
     }
 }

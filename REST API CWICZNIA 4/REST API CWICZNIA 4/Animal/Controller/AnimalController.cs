@@ -27,6 +27,12 @@ public class AnimalController : ControllerBase
        return Ok(_animalService.GetById(id));
    }
    
+   [HttpGet("{id}/records")]
+   public IActionResult GetAnimalRecords(int id)
+   {
+       return Ok(_animalService.GetAnimalRecords(id));
+   }
+   
    [HttpPut]
    public IActionResult CreateAnimal(AnimalRequest animalRequest)
    {
