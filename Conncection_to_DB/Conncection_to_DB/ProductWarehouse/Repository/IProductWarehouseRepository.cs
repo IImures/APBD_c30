@@ -4,5 +4,7 @@ namespace Conncection_to_DB.ProductWarehouse.Repository;
 
 public interface IProductWarehouseRepository
 {
-    ProductWarehouseEntity SaveProduct(ProductWarehouseEntity productWarehouseEntity);
+    Task<ProductWarehouseEntity> SaveProduct(ProductWarehouseEntity productWarehouseEntity);
+    
+    Task<ProductWarehouseEntity?> GetByOrderId(long OrderID);
 }

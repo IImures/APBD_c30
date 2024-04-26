@@ -13,20 +13,20 @@ public class WarehouseRepository : IWarehouseRepository
         _configuration = configuration;
     }
     
-    public WarehouseEntity Get(long id)
+    public async Task<WarehouseEntity?> Get(long id)
     {
-        var con = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        await using var con = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         con.Open();
         
-        using var cmd = new SqlCommand();
+        await using var cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.CommandText = "SELECT IdWarehouse, Name, Address FROM Warehouse WHERE IdWarehouse = @Id";
         cmd.Parameters.AddWithValue("@Id", id);
         
-        var dr = cmd.ExecuteReader();
+        var dr = await cmd.ExecuteReaderAsync();
         
         WarehouseEntity warehouse = null;
-        if (dr.Read())
+        if (await dr.ReadAsync())
         {
             warehouse = new WarehouseEntity
             {
@@ -35,8 +35,6 @@ public class WarehouseRepository : IWarehouseRepository
                 Address = dr["Address"].ToString()
             };
         }
-        
-        con.Close();
         
         return warehouse;
     }

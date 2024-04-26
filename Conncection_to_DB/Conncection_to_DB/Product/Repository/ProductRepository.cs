@@ -13,20 +13,20 @@ public class ProductRepository : IProductRepository
         _configuration = configuration;
     }
 
-    public ProductEntity? Get(long id)
+    public async Task<ProductEntity?> Get(long id)
     {
-        var con = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
-        con.Open();
+        await using var con =  new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        await con.OpenAsync();
         
-        using var cmd = new SqlCommand();
+        await using var cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.CommandText = "SELECT IdProduct, Name, Description, Price FROM Product WHERE IdProduct = @Id";
         cmd.Parameters.AddWithValue("@Id", id);
         
-        var dr = cmd.ExecuteReader();
+        var dr = await cmd.ExecuteReaderAsync();
         
         ProductEntity product = null;
-        if (dr.Read())
+        if (await dr.ReadAsync())
         {
             product = new ProductEntity
             {
@@ -36,8 +36,6 @@ public class ProductRepository : IProductRepository
                 Price = Convert.ToDouble(dr["Price"])
             };
         }
-        
-        con.Close();
         
         return product;
     }

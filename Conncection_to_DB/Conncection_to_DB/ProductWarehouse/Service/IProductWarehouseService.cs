@@ -5,5 +5,5 @@ namespace Conncection_to_DB.ProductWarehouse.Service;
 
 public interface IProductWarehouseService
 {
-    ProductWarehouseResponse CreateProduct(ProductWarehouseRequest productWarehouseRequest);
+    Task<ProductWarehouseResponse> CreateProduct(ProductWarehouseRequest request);
 }

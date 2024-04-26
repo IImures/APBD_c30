@@ -1,7 +1,9 @@
 
+using Conncection_to_DB.Order.Repository;
 using Conncection_to_DB.Product.Repository;
 using Conncection_to_DB.ProductWarehouse.Repository;
 using Conncection_to_DB.ProductWarehouse.Service;
+using Conncection_to_DB.Warehouse.Repository;
 
 public class Program
 {
@@ -17,8 +19,10 @@ public class Program
 
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductWarehouseRepository, ProductWarehouseRepository>();
-        
+        builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>(); 
         builder.Services.AddScoped<IProductWarehouseService, ProductWarehouseService>();
+        builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>(); // Ensure this line is present
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
         var app = builder.Build();
 

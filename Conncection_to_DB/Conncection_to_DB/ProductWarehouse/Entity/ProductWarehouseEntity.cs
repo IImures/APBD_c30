@@ -2,11 +2,11 @@
 
 public class ProductWarehouseEntity
 {
-    long IdProductWarehouse { get; set; }
-    long IdWarehouse { get; set; }
-    long IdProduct { get; set; }
-    long IdOrder { get; set; }
-    int Amount { get; set; }
-    double Price { get; set; }
-    DateTime CreatedAt { get; set; }
+    public long IdProductWarehouse { get; set; }
+    public long IdWarehouse { get; set; }
+    public long IdProduct { get; set; }
+    public long IdOrder { get; set; }
+    public int Amount { get; set; }
+    public double Price { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

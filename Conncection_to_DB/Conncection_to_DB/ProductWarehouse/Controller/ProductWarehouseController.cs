@@ -1,4 +1,5 @@
-﻿using Conncection_to_DB.ProductWarehouse.Controller.Request;
+﻿using Conncection_to_DB.Exceptions;
+using Conncection_to_DB.ProductWarehouse.Controller.Request;
 using Conncection_to_DB.ProductWarehouse.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,20 @@ public class ProductWarehouseController : ControllerBase
     }
     
     [HttpPut]
-    public IActionResult CreateProduct(ProductWarehouseRequest productWarehouseRequest)
+    public async Task<IActionResult> CreateProduct(ProductWarehouseRequest productWarehouseRequest)
     {
-        _productWarehouseService.CreateProduct(productWarehouseRequest);
+        try
+        {
+            await _productWarehouseService.CreateProduct(productWarehouseRequest);
+        }
+        catch (NotFound e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (WrongValue e)
+        {
+            return BadRequest(e.Message);
+        }
         return Created();
     }
 }
