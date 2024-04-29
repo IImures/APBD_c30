@@ -21,7 +21,7 @@ public class Program
         builder.Services.AddScoped<IProductWarehouseRepository, ProductWarehouseRepository>();
         builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>(); 
         builder.Services.AddScoped<IProductWarehouseService, ProductWarehouseService>();
-        builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>(); // Ensure this line is present
+        builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>(); 
         builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
         var app = builder.Build();
