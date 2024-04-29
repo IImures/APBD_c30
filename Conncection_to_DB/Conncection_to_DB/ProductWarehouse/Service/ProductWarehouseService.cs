@@ -55,20 +55,20 @@ public class ProductWarehouseService : IProductWarehouseService
         {
             throw new OrderFulfilled("Order already fulfilled");
         }
-
+        ProductWarehouseEntity productWarehouse = null!;
         try
         {
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 await _orderRepository.UpdateFulfilled(orderEntity.IdOrder, DateTime.Now);
-                ProductWarehouseEntity productWarehouse =
+                productWarehouse =
                     await _productWarehouseRepository.SaveProduct(new ProductWarehouseEntity()
                     {
                         IdWarehouse = warehouseEntity.IdWarehouse,
                         IdProduct = productEntity.Id,
                         IdOrder = orderEntity.IdOrder,
                         Amount = request.Amount,
-                        Price = productEntity.Price,
+                        Price = productEntity.Price * orderEntity.Amount,
                         CreatedAt = request.CreatedAt
                     });
                 transaction.Complete();
@@ -81,10 +81,10 @@ public class ProductWarehouseService : IProductWarehouseService
 
         return new ProductWarehouseResponse()
         {
-            IdProduct = productEntity.Id,
-            IdWarehouse = request.IdWarehouse,
-            Amount = request.Amount,
-            CreatedAt = DateTime.Now
+            IdProduct = productWarehouse.IdProduct,
+            IdWarehouse = productWarehouse.IdWarehouse,
+            Amount = productWarehouse.Amount,
+            CreatedAt = productWarehouse.CreatedAt
         };
     }
     

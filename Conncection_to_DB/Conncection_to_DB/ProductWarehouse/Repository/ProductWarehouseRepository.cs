@@ -52,7 +52,7 @@ public class ProductWarehouseRepository : IProductWarehouseRepository
             };
         }
 
-        return product;
+        return product!;
     }
 
     public async Task<ProductWarehouseEntity?> GetByOrderId(long OrderID)
