@@ -1,4 +1,5 @@
-﻿using Conncection_to_DB.Exceptions;
+﻿using System.Transactions;
+using Conncection_to_DB.Exceptions;
 using Conncection_to_DB.ProductWarehouse.Controller.Request;
 using Conncection_to_DB.ProductWarehouse.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,11 @@ public class ProductWarehouseController : ControllerBase
         {
             return BadRequest(e.Message);
         }
+        catch (TransactionAbortedException e)
+        {
+            return  StatusCode(500);
+        }
+
         return Created();
     }
 }

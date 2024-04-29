@@ -56,26 +56,20 @@ public class ProductWarehouseService : IProductWarehouseService
             throw new OrderFulfilled("Order already fulfilled");
         }
         ProductWarehouseEntity productWarehouse = null!;
-        try
+        using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await _orderRepository.UpdateFulfilled(orderEntity.IdOrder, DateTime.Now);
-                productWarehouse =
-                    await _productWarehouseRepository.SaveProduct(new ProductWarehouseEntity()
-                    {
-                        IdWarehouse = warehouseEntity.IdWarehouse,
-                        IdProduct = productEntity.Id,
-                        IdOrder = orderEntity.IdOrder,
-                        Amount = request.Amount,
-                        Price = productEntity.Price * orderEntity.Amount,
-                        CreatedAt = request.CreatedAt
-                    });
-                transaction.Complete();
-            }
-        }catch (TransactionAbortedException ex)
-        {
-            Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+            await _orderRepository.UpdateFulfilled(orderEntity.IdOrder, DateTime.Now);
+            productWarehouse =
+                await _productWarehouseRepository.SaveProduct(new ProductWarehouseEntity()
+                {
+                    IdWarehouse = warehouseEntity.IdWarehouse,
+                    IdProduct = productEntity.Id,
+                    IdOrder = orderEntity.IdOrder,
+                    Amount = request.Amount,
+                    Price = productEntity.Price * orderEntity.Amount,
+                    CreatedAt = request.CreatedAt
+                });
+            transaction.Complete();
         }
 
 
