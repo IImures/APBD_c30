@@ -164,7 +164,7 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<Emp> Task1()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = Emps.Where(emp => emp.Job == "Backend programmer");
             return result;
         }
 
@@ -173,7 +173,9 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<Emp> Task2()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = Emps.Where(emp => emp.Job == "Frontend programmer"
+                                                        && emp.Salary > 1000)
+                .OrderBy(emp => emp.Empno);
             return result;
         }
 
@@ -183,7 +185,7 @@ namespace Exercise6
         /// </summary>
         public static int Task3()
         {
-            int result = 0;
+            int result = Emps.Max(emp => emp.Salary);
             return result;
         }
 
@@ -192,7 +194,7 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<Emp> Task4()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = Emps.Where(emp => emp.Salary == Emps.Max(emp1 => emp1.Salary));
             return result;
         }
 
@@ -201,7 +203,11 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<object> Task5()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Select(emp => new 
+            {
+                Nazwisko = emp.Ename,
+                Praca = emp.Job
+            });
             return result;
         }
 
@@ -212,7 +218,12 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<object> Task6()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Join(Depts, emp => emp.Deptno, dept =>dept.Deptno, (emp, dept) => new
+            {
+                emp.Ename,
+                emp.Job,
+                dept.Dname
+            });
             return result;
         }
 
@@ -221,7 +232,12 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<object> Task7()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.GroupBy(emp => emp.Job)
+                .Select(e => new
+                {
+                    Praca = e.Key,
+                    LiczbaPracownikow = e.Count()
+                });
             return result;
         }
 
