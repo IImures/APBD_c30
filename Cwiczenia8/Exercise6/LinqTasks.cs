@@ -304,8 +304,6 @@ namespace Exercise6
                     numOfEmployees = Emps.Where(emp => emp.Deptno == dept.Deptno).Count()
                 })
                 ;
-            Console.WriteLine(result.Count());
-   
             return result;
         }
 
