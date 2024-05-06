@@ -247,7 +247,7 @@ namespace Exercise6
         /// </summary>
         public static bool Task8()
         {
-            bool result = false;
+            bool result = Emps.Any(emp => emp.Job == "Backend programmer");
             return result;
         }
 
@@ -257,7 +257,7 @@ namespace Exercise6
         /// </summary>
         public static Emp Task9()
         {
-            Emp result = null;
+            Emp result = Emps.First(emp => emp.Job == "Frontend programmer");
             return result;
         }
 
@@ -268,7 +268,19 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<object> Task10()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Emps.Select(emp => new
+            {
+                Ename = emp.Ename,
+                Job = (string?)emp.Job,
+                HireDate = emp.HireDate
+            }).Union(new [] 
+            {   new
+                {
+                    Ename = "Brak wartości",
+                    Job = (string?)null,
+                    HireDate = (DateTime?)null
+                }
+            });
             return result;
         }
 
@@ -285,7 +297,15 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<object> Task11()
         {
-            IEnumerable<object> result = null;
+            IEnumerable<object> result = Depts.Where(dept => Emps.Where(emp => emp.Deptno == dept.Deptno).Count() > 1)
+                .Select(dept => new
+                {
+                    name = dept.Dname,
+                    numOfEmployees = Emps.Where(emp => emp.Deptno == dept.Deptno).Count()
+                })
+                ;
+            Console.WriteLine(result.Count());
+   
             return result;
         }
 
@@ -298,7 +318,8 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<Emp> Task12()
         {
-            IEnumerable<Emp> result = null;
+            IEnumerable<Emp> result = Emps
+                .FindEmpsWithMgr().OrderBy(emp => emp.Ename).ThenByDescending(emp => emp.Salary);
             return result;
         }
 
@@ -311,7 +332,9 @@ namespace Exercise6
         /// </summary>
         public static int Task13(int[] arr)
         {
-            int result = 0;
+            int result = arr.GroupBy(e=> e)
+                .Where(e => e.Count() % 2 == 1)
+                .Select(e => e.Key).First();
             //result=
             return result;
         }
@@ -322,7 +345,9 @@ namespace Exercise6
         /// </summary>
         public static IEnumerable<Dept> Task14()
         {
-            IEnumerable<Dept> result = null;
+            IEnumerable<Dept> result = Depts.Where(dept => Emps.Where(emp => emp.Deptno == dept.Deptno).Count() == 5 
+                                                           || Emps.Where(emp => emp.Deptno == dept.Deptno).Count() == 0)
+                .OrderBy(dept => dept.Dname);
             //result =
             return result;
         }
@@ -331,5 +356,9 @@ namespace Exercise6
     public static class CustomExtensionMethods
     {
         //Put your extension methods here
+        public static IEnumerable<Emp> FindEmpsWithMgr(this IEnumerable<Emp> emps)
+        { 
+            return emps.Where(emp1 => emps.Any(emp2 => emp2.Mgr?.Empno == emp1.Empno));
+        }
     }
 }
