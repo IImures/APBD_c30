@@ -2,6 +2,8 @@
 using EF_ZAD.Context;
 using EF_ZAD.Middlewares;
 using EF_ZAD.Services;
+using EF_ZAD.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -19,6 +21,9 @@ public class Program
             );
         builder.Services.AddScoped<IAccountService, AccountService>();
         builder.Services.AddScoped<IProductService, ProductService>();
+        
+        builder.Services.AddValidatorsFromAssemblyContaining<ProductRequestValidator>();
+
 
         var app = builder.Build();
 

@@ -1,5 +1,7 @@
 ﻿using EF_ZAD.Controllers.Requests;
 using EF_ZAD.Services;
+using EF_ZAD.Validators;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EF_ZAD.Controllers;
@@ -16,8 +18,13 @@ public class ProductController :ControllerBase
     }
  
     [HttpPost]
-    public async Task<IActionResult> CreateProduct(ProductRequest productRequest)
+    public async Task<IActionResult> CreateProduct(ProductRequest productRequest,
+        IValidator<ProductRequest> validator)
     {
+        var validationResult = await validator.ValidateAsync(productRequest);
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+    
         return Ok(await _productService.CreateProduct(productRequest));
     }
 }

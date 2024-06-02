@@ -35,8 +35,15 @@ public class ExceptionHandler
         catch (Exception ex)
         {
             context.Response.StatusCode = 500;
-            Console.WriteLine(ex.Message);
-            await context.Response.WriteAsync(ex.Message);
+            context.Response.ContentType = "application/json";
+            string jsonResponse = JsonSerializer.Serialize(new
+            {
+                Message = ex.Message,
+                Time = DateTime.Now
+            });
+            
+            
+            await context.Response.WriteAsync(jsonResponse);
         }
     }
 }

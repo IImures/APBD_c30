@@ -2,6 +2,7 @@
 using EF_ZAD.Controllers.Requests;
 using EF_ZAD.Controllers.Responses;
 using EF_ZAD.Entities;
+using EF_ZAD.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF_ZAD.Services;
@@ -30,6 +31,8 @@ public class ProductService : IProductService
         List<Category> categories = await _context.Category
             .Where(e => productRequest.Categories.Contains(e.CategoryId))
             .ToListAsync();
+        if (categories.Count != productRequest.Categories.Count)
+            throw new NotFoundException("Some categories do not exist");
         foreach (var category in categories)
         {
             toSave.Categories.Add(category);
