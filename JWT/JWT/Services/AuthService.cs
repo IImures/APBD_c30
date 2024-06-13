@@ -56,11 +56,11 @@ public class AuthService : IAuthService
         
         if(user == null)
         {
-            throw new NotFoundException("User with this name does not exists", 404);
+            throw new NotFoundException("Invalid password or login", 401);
         }
         if(!new PasswordHasher<User>().VerifyHashedPassword(user, user.Password, request.Password).Equals(PasswordVerificationResult.Success))
         {
-            throw new BadCredentialsException("Invalid password", 400);
+            throw new BadCredentialsException("Invalid password or login", 401);
         }
         
         return new LoginResponse
@@ -74,7 +74,7 @@ public class AuthService : IAuthService
     {
         if (!ValidateRefreshToken(request))
         {
-            throw new UnauthorizedAccessException("Invalid refresh token");
+            throw new InvalidTokenException("Invalid refresh token", 401);
         }
         
         var handler = new JwtSecurityTokenHandler();
