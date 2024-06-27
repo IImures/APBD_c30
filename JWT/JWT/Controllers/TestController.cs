@@ -17,6 +17,7 @@ namespace JWT.Controllers
         }
 
         [HttpGet("exception")]
+        [Authorize]
         public IActionResult ThrowException()
         {
             throw new Exception("No tragedia :(");

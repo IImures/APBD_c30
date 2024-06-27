@@ -120,7 +120,7 @@ public class AuthService : IAuthService
     {
         Claim[] userClaims = new[]
         {
-            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Name, user.Name), 
         };
         
         SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!));
